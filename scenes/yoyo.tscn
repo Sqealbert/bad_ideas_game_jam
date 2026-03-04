@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgbdmj5a5lqx0"]
+
+[ext_resource type="Texture2D" uid="uid://cmsunywnrf3cr" path="res://scripts/icon.svg" id="1_6uadq"]
+[ext_resource type="Script" uid="uid://csgocuyd3y5eg" path="res://scripts/yoyo.gd" id="1_dtx0s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6uadq"]
+radius = 13.0
+
+[sub_resource type="Animation" id="Animation_157i5"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_dtx0s"]
+resource_name = "attack"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ka6b"]
+_data = {
+&"RESET": SubResource("Animation_157i5"),
+&"attack": SubResource("Animation_dtx0s")
+}
+
+[node name="Yo-yo" type="StaticBody2D"]
+collision_layer = 4
+script = ExtResource("1_dtx0s")
+attack_length = 100.0
+attack_speed = 0.2
+retract_speed = 0.2
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_6uadq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6uadq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8ka6b")
+}
