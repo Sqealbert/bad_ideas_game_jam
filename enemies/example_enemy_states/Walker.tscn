@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b72lipvoxrkk4"]
+
+[ext_resource type="PackedScene" uid="uid://bhdqvrokkm3o5" path="res://enemies/base_enemy/BaseEnemy.tscn" id="1_bltr0"]
+[ext_resource type="Script" uid="uid://b5hcmmrgnjrk6" path="res://enemies/example_enemy_states/walker.gd" id="2_c4nb7"]
+[ext_resource type="PackedScene" uid="uid://bsw3ysvyq6sik" path="res://enemies/states/st_walk.tscn" id="3_cssdf"]
+[ext_resource type="PackedScene" uid="uid://djfk6nmcvncb1" path="res://enemies/states/st_idle.tscn" id="4_k4eym"]
+
+[node name="WalkerEnemy" instance=ExtResource("1_bltr0")]
+scale = Vector2(0.495, 2.19)
+script = ExtResource("2_c4nb7")
+
+[node name="BodyCollision" parent="." index="1"]
+position = Vector2(-0.99999976, -1.8507378e-06)
+scale = Vector2(0.9999999, 1)
+
+[node name="ST_Walk" parent="States" index="0" instance=ExtResource("3_cssdf")]
+
+[node name="ST_Idle" parent="States" index="1" instance=ExtResource("4_k4eym")]
+
+[node name="StateSwitchTimer" type="Timer" parent="." index="4"]
+autostart = true
+
+[connection signal="timeout" from="StateSwitchTimer" to="." method="_on_state_switch_timer_timeout"]

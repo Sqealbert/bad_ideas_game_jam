@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhdqvrokkm3o5"]
+
+[ext_resource type="Texture2D" uid="uid://c2wc5eupjnxcv" path="res://audio/icon.svg" id="1_e07sp"]
+[ext_resource type="Script" uid="uid://chbyimuucsvtv" path="res://enemies/base_enemy/base_enemy.gd" id="1_s437t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e07sp"]
+size = Vector2(116, 64.84018)
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_s437t"]
+
+[node name="BaseEnemy" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_s437t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1, 0.546875)
+texture = ExtResource("1_e07sp")
+
+[node name="BodyCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_e07sp")
+
+[node name="SenceCollision" type="Node2D" parent="."]
+
+[node name="TraceLeft" type="Area2D" parent="SenceCollision"]
+collision_layer = 0
+
+[node name="TraceLeftGround" type="CollisionShape2D" parent="SenceCollision/TraceLeft"]
+position = Vector2(-64, 29)
+rotation = 0.5235988
+shape = SubResource("SeparationRayShape2D_s437t")
+
+[node name="TraceRight" type="Area2D" parent="SenceCollision"]
+collision_layer = 0
+
+[node name="TraceRightGround" type="CollisionShape2D" parent="SenceCollision/TraceRight"]
+position = Vector2(63, 28)
+rotation = -0.5235988
+shape = SubResource("SeparationRayShape2D_s437t")
+
+[node name="States" type="Node" parent="."]
+
+[connection signal="body_exited" from="SenceCollision/TraceLeft" to="." method="ledge_collision_detect"]
+[connection signal="body_exited" from="SenceCollision/TraceRight" to="." method="ledge_collision_detect"]

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://djfk6nmcvncb1"]
+
+[ext_resource type="PackedScene" uid="uid://iv6x7jvrkl1j" path="res://enemies/states/BaseState.tscn" id="1_orhq1"]
+[ext_resource type="Script" uid="uid://b7mxvmxqdy28t" path="res://enemies/states/st_idle.gd" id="2_0dncl"]
+
+[node name="ST_Idle" instance=ExtResource("1_orhq1")]
+script = ExtResource("2_0dncl")
