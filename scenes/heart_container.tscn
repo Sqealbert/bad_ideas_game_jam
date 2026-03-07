@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b5uhvmbcpfodg"]
+
+[node name="HeartContainer" type="CanvasLayer"]
+
+[node name="HFlowContainer" type="HFlowContainer" parent="."]
+custom_minimum_size = Vector2(500, 50)
+anchors_preset = -1
+offset_left = 10.0
+offset_top = 10.0

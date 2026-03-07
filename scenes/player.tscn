@@ -1,29 +1,93 @@
-[gd_scene load_steps=5 format=3 uid="uid://casgcs7q8ujxx"]
+[gd_scene load_steps=11 format=3 uid="uid://casgcs7q8ujxx"]
 
-[ext_resource type="Texture2D" uid="uid://cmsunywnrf3cr" path="res://scripts/icon.svg" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dcb5gnqah0kxm" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://cgbdmj5a5lqx0" path="res://scenes/yoyo.tscn" id="2_qhqgy"]
+[ext_resource type="Shader" uid="uid://bnsrbdmeul2n4" path="res://shaders/damage_flash.gdshader" id="3_qlg0r"]
+[ext_resource type="PackedScene" uid="uid://b5uhvmbcpfodg" path="res://scenes/heart_container.tscn" id="4_dqkch"]
+[ext_resource type="Texture2D" uid="uid://c1ki7wncxbolr" path="res://grapics/sweet_baby.png" id="4_qlg0r"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
-size = Vector2(121.75, 119.25)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
+radius = 22.0
+height = 142.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tuyoq"]
+shader = ExtResource("3_qlg0r")
+shader_parameter/active = false
+
+[sub_resource type="Animation" id="Animation_qlg0r"]
+resource_name = "damage_flash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_tuyoq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fjrip"]
+_data = {
+&"RESET": SubResource("Animation_tuyoq"),
+&"damage_flash": SubResource("Animation_qlg0r")
+}
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 4
+collision_layer = 2
 script = ExtResource("1_g2els")
+max_health = 5
 jump_height = 150.0
 jump_time_to_peak = 0.5
 jump_time_to_descent = 0.4
 
-[node name="Icon" type="Sprite2D" parent="."]
-texture = ExtResource("1_3vyb7")
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(4, 12)
+shape = SubResource("CapsuleShape2D_dqkch")
+
+[node name="Yoyo" parent="." instance=ExtResource("2_qhqgy")]
+position = Vector2(-2, -2)
+collision_mask = 9
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -0.375)
-shape = SubResource("RectangleShape2D_qhqgy")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_tuyoq")
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_qlg0r")
 
-[node name="Yoyo" parent="." instance=ExtResource("2_qhqgy")]
-position = Vector2(77, 4)
+[node name="HeartContainer" parent="." instance=ExtResource("4_dqkch")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 12)
+shape = SubResource("CapsuleShape2D_dqkch")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fjrip")
+}
 
 [connection signal="attack" from="." to="Yoyo" method="_on_player_attack"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

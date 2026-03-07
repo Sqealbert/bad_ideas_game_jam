@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b26s4j7cwwjxt"]
 
 [ext_resource type="PackedScene" uid="uid://casgcs7q8ujxx" path="res://scenes/player.tscn" id="1_errlg"]
-[ext_resource type="Texture2D" uid="uid://cmsunywnrf3cr" path="res://scripts/icon.svg" id="2_bl13t"]
+[ext_resource type="Texture2D" uid="uid://dm35m8mlpamm7" path="res://icon.svg" id="2_74lek"]
 [ext_resource type="PackedScene" uid="uid://b72lipvoxrkk4" path="res://enemies/example_enemy_states/Walker.tscn" id="3_74lek"]
 [ext_resource type="PackedScene" uid="uid://bhdqvrokkm3o5" path="res://enemies/base_enemy/BaseEnemy.tscn" id="3_iyx0m"]
 
@@ -11,7 +11,7 @@ size = Vector2(984, 120)
 [node name="Test" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_errlg")]
-position = Vector2(-249, -32)
+position = Vector2(156, -37)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -22,7 +22,7 @@ shape = SubResource("RectangleShape2D_iyx0m")
 [node name="Icon" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(-1, 247)
 scale = Vector2(7.734375, 1)
-texture = ExtResource("2_bl13t")
+texture = ExtResource("2_74lek")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(1200, 0)
@@ -34,7 +34,7 @@ shape = SubResource("RectangleShape2D_iyx0m")
 [node name="Icon" type="Sprite2D" parent="StaticBody2D2"]
 position = Vector2(-1, 247)
 scale = Vector2(7.734375, 1)
-texture = ExtResource("2_bl13t")
+texture = ExtResource("2_74lek")
 
 [node name="BaseEnemy" parent="." instance=ExtResource("3_iyx0m")]
 position = Vector2(-395, 136)
