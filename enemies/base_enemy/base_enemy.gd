@@ -19,7 +19,6 @@ func initialise_states():
 	elif $States.get_children().size(): # if has children raise an error
 		push_error("Enemy " + self.name + " has no beginning state")
 	
-	
 func _ready() -> void:
 	initialise_states()
 	
@@ -47,3 +46,24 @@ func AI(delta):
 
 func ledge_collision_detect(_body: Node2D):
 	turn()
+
+func can_see_target(body: Node2D) -> bool:
+	var space_state = get_world_2d().direct_space_state
+	
+	var query = PhysicsRayQueryParameters2D.create(
+		global_position,
+		body.global_position
+	)
+	
+	query.exclude = [self]
+	query.collision_mask = 1 # set to the layers walls are on
+	
+	var result = space_state.intersect_ray(query)
+	
+	if result.is_empty():
+		return true
+	
+	if result.collider == body:
+		return true
+	
+	return false

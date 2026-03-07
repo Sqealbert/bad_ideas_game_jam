@@ -35,10 +35,6 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_o3a8y")
 debug_color = Color(0.36862746, 0.5921569, 0.49411765, 0.20784314)
 
-[node name="RayCast2D" type="RayCast2D" parent="SenceCollision" index="3"]
-enabled = false
-collision_mask = 3
-
 [node name="FloatIdleState" parent="States" index="0" instance=ExtResource("3_o3a8y")]
 
 [node name="FlyTo" parent="States" index="1" instance=ExtResource("3_fy4rl")]

@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://dv50bt2xfh6ui"]
+
+[ext_resource type="PackedScene" uid="uid://bhdqvrokkm3o5" path="res://enemies/base_enemy/BaseEnemy.tscn" id="1_tvrma"]
+[ext_resource type="Script" uid="uid://citl6pqbb8qpm" path="res://enemies/plastic_soldier_enemy/plastic_shooter_enemy.gd" id="2_sss10"]
+[ext_resource type="PackedScene" uid="uid://b0dtbwmb8ifih" path="res://enemies/states/walk_to_state.tscn" id="3_016ny"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sss10"]
+radius = 21.5
+height = 173.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sss10"]
+
+[node name="PlasticShooterEnemy" instance=ExtResource("1_tvrma")]
+script = ExtResource("2_sss10")
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(0.35, 1.362)
+
+[node name="BodyCollision" parent="." index="1"]
+position = Vector2(0, -0.50000095)
+shape = SubResource("CapsuleShape2D_sss10")
+
+[node name="TraceLeftGround" parent="SenceCollision/TraceLeft" index="0"]
+position = Vector2(-23, 85)
+
+[node name="TraceRightGround" parent="SenceCollision/TraceRight" index="0"]
+position = Vector2(23, 86)
+
+[node name="SigthArea" type="Area2D" parent="SenceCollision" index="2"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SenceCollision/SigthArea" index="0"]
+scale = Vector2(49.74, 20.75)
+shape = SubResource("RectangleShape2D_sss10")
+debug_color = Color(0.36862746, 0.5921569, 0.49411765, 0.20784314)
+
+[node name="WalkToState" parent="States" index="0" instance=ExtResource("3_016ny")]
+
+[node name="PatrollPoint1" type="Marker2D" parent="." index="4"]
+position = Vector2(187, 83)
+
+[node name="PatrollPoint2" type="Marker2D" parent="." index="5"]
+position = Vector2(-261, 84)

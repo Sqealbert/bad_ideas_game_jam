@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0dtbwmb8ifih"]
+
+[ext_resource type="PackedScene" uid="uid://iv6x7jvrkl1j" path="res://enemies/states/BaseState.tscn" id="1_m5di2"]
+[ext_resource type="Script" uid="uid://4yq4slm5rwyd" path="res://enemies/states/walk_to_state.gd" id="2_pfut7"]
+
+[node name="WalkToState" instance=ExtResource("1_m5di2")]
+script = ExtResource("2_pfut7")

@@ -6,15 +6,10 @@ var float_offset = 20
 var rotation_offset = deg_to_rad(30)
 var rotation_speed = PI/400
 
-var ray
+var in_line_of_sight = false
 
 func _ready() -> void:
 	initialise_states()
-	
-	ray = 	$SenceCollision/RayCast2D
-	# ignore self and target if they are on a correct collision mast this is not needed
-	ray.add_exception(self)
-
 		# Make sure to not await during _ready.
 	actor_setup.call_deferred()
 	
@@ -32,8 +27,11 @@ func AI(delta):
 	if not current_state.run(delta):
 		## in this case indicates that target has been lost
 		switch_state()
-		
 	rotate_with_speed()
+	
+	if target and can_see_target(target):
+		if current_state == $States/FloatIdleState:
+			switch_state()
 		
 func rotate_with_speed():
 	if velocity.x > 0:
@@ -53,17 +51,12 @@ func switch_state(): ## switches between idle and following based on external si
 	$rotFallbackTimer.start()# will get used if going int idle, for follow is uselles
 
 func _on_sigth_area_body_entered(body: Node2D) -> void:
-	ray.add_exception(body)
-	ray.target_position = to_local(body.position)
-	# ray is often disabled to help performance
-	ray.enabled = true
-	if not ray.is_colliding() and not body.is_in_group("enemies"):
-		target = body
-		if current_state == $States/FloatIdleState:
-			switch_state()
-	ray.enabled = false
+	in_line_of_sight = true
+	target = body
 
 func _on_sigth_area_body_exited(body: Node2D) -> void:
+	in_line_of_sight = false
+
 	# replace player reference with a ghost Node 2D with the last seen location
 	if body == target:
 		var last_known_loc = Node2D.new()
