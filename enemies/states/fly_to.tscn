@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://xuss8oobsju8"]
+
+[ext_resource type="PackedScene" uid="uid://iv6x7jvrkl1j" path="res://enemies/states/BaseState.tscn" id="1_d4lm6"]
+[ext_resource type="Script" uid="uid://cttfy237akk6u" path="res://enemies/states/fly_to.gd" id="2_6o12p"]
+
+[node name="FlyTo" instance=ExtResource("1_d4lm6")]
+script = ExtResource("2_6o12p")

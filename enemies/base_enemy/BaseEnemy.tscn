@@ -4,11 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://dm35m8mlpamm7" path="res://icon.svg" id="2_s437t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e07sp"]
-size = Vector2(116, 64.84018)
+size = Vector2(119, 63)
 
 [sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_s437t"]
 
-[node name="BaseEnemy" type="CharacterBody2D"]
+[node name="BaseEnemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_s437t")
@@ -18,7 +18,7 @@ scale = Vector2(1, 0.546875)
 texture = ExtResource("2_s437t")
 
 [node name="BodyCollision" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 0)
+position = Vector2(-1, -0.50000095)
 shape = SubResource("RectangleShape2D_e07sp")
 
 [node name="SenceCollision" type="Node2D" parent="."]

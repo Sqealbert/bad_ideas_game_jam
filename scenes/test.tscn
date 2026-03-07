@@ -1,14 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://b26s4j7cwwjxt"]
+[gd_scene load_steps=9 format=3 uid="uid://b26s4j7cwwjxt"]
 
 [ext_resource type="PackedScene" uid="uid://casgcs7q8ujxx" path="res://scenes/player.tscn" id="1_errlg"]
 [ext_resource type="Texture2D" uid="uid://dm35m8mlpamm7" path="res://icon.svg" id="2_74lek"]
 [ext_resource type="PackedScene" uid="uid://b72lipvoxrkk4" path="res://enemies/example_enemy_states/Walker.tscn" id="3_74lek"]
 [ext_resource type="PackedScene" uid="uid://bhdqvrokkm3o5" path="res://enemies/base_enemy/BaseEnemy.tscn" id="3_iyx0m"]
+[ext_resource type="PackedScene" uid="uid://caas372ggjm2d" path="res://enemies/helicopter_enemy/helicopter_enemy.tscn" id="4_j5jx5"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_j5jx5"]
+vertices = PackedVector2Array(1381.4766, 511.14844, 1381.4375, 510.45313, 2460.6406, 517, 2580.8438, 896.0625, 3.7421875, 918.96875, -18.460938, 501, 265.90625, 501, 2577.1563, 517, -28.578125, -698.14844, 2578, -722.8594, 2578, 139.32031, 2453.039, 145, 1737.4688, 53, 269.21094, 153, -18.429688, 157.9375, 1462.7578, 53, 1351, 154.09375, 1351, 157.39844, 1463.7813, 152.10938, 1739.4609, 146.71094)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5, 6, 0), PackedInt32Array(3, 2, 7), PackedInt32Array(8, 9, 10, 11, 12), PackedInt32Array(13, 14, 8, 15), PackedInt32Array(16, 17, 13), PackedInt32Array(15, 18, 16, 13), PackedInt32Array(11, 19, 12), PackedInt32Array(8, 12, 15)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(267, 381, 1256, 390, 1251, 277, 270, 273, -137, 280, -150, -817, 2698, -844, 2698, 254, 2456, 265, 1622, 267, 1620, 173, 1584, 173, 1585, 270, 1471, 272, 1471, 391, 2461, 397, 2696, 397, 2702, 1015, -110, 1040, -145, 381)])
+agent_radius = 120.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iyx0m"]
 size = Vector2(984, 120)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5jx5"]
+size = Vector2(989, 128)
+
 [node name="Test" type="Node2D"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(-766, -87)
+navigation_polygon = SubResource("NavigationPolygon_j5jx5")
 
 [node name="Player" parent="." instance=ExtResource("1_errlg")]
 position = Vector2(156, -37)
@@ -20,6 +34,19 @@ position = Vector2(-3, 245)
 shape = SubResource("RectangleShape2D_iyx0m")
 
 [node name="Icon" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-1, 247)
+scale = Vector2(7.734375, 1)
+texture = ExtResource("2_74lek")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(837.00006, -66.00003)
+scale = Vector2(0.034998775, 0.83499956)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(-1.5, 247)
+shape = SubResource("RectangleShape2D_j5jx5")
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D3"]
 position = Vector2(-1, 247)
 scale = Vector2(7.734375, 1)
 texture = ExtResource("2_74lek")
@@ -38,6 +65,10 @@ texture = ExtResource("2_74lek")
 
 [node name="BaseEnemy" parent="." instance=ExtResource("3_iyx0m")]
 position = Vector2(-395, 136)
+
+[node name="HelicopterEnemy" parent="." instance=ExtResource("4_j5jx5")]
+position = Vector2(821, -46)
+current_state_index = 0
 
 [node name="WalkerEnemy" parent="." instance=ExtResource("3_74lek")]
 position = Vector2(1080.9999, 27)

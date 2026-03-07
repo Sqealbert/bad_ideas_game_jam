@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsrm04i3ckgqj"]
+
+[ext_resource type="PackedScene" uid="uid://iv6x7jvrkl1j" path="res://enemies/states/BaseState.tscn" id="1_o6t48"]
+[ext_resource type="Script" uid="uid://c4cw5rycp5un7" path="res://enemies/states/float_idle_state.gd" id="2_3g10b"]
+
+[node name="FloatIdleState" instance=ExtResource("1_o6t48")]
+script = ExtResource("2_3g10b")

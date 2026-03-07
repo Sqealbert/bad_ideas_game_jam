@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://caas372ggjm2d"]
+
+[ext_resource type="PackedScene" uid="uid://bhdqvrokkm3o5" path="res://enemies/base_enemy/BaseEnemy.tscn" id="1_6wqpv"]
+[ext_resource type="Script" uid="uid://c8cf2xprcy6r" path="res://enemies/helicopter_enemy/helicopter_enemy.gd" id="2_rme28"]
+[ext_resource type="PackedScene" uid="uid://xuss8oobsju8" path="res://enemies/states/fly_to.tscn" id="3_fy4rl"]
+[ext_resource type="PackedScene" uid="uid://bsrm04i3ckgqj" path="res://enemies/states/float_idle_state.tscn" id="3_o3a8y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fy4rl"]
+radius = 67.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o3a8y"]
+radius = 569.1265
+
+[node name="HelicopterEnemy" instance=ExtResource("1_6wqpv")]
+script = ExtResource("2_rme28")
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(1, 1)
+
+[node name="BodyCollision" parent="." index="1"]
+position = Vector2(0, 1.0000019)
+shape = SubResource("CircleShape2D_fy4rl")
+
+[node name="TraceLeft" parent="SenceCollision" index="0"]
+monitoring = false
+
+[node name="TraceRight" parent="SenceCollision" index="1"]
+monitoring = false
+
+[node name="SigthArea" type="Area2D" parent="SenceCollision" index="2"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SenceCollision/SigthArea" index="0"]
+shape = SubResource("CircleShape2D_o3a8y")
+debug_color = Color(0.36862746, 0.5921569, 0.49411765, 0.20784314)
+
+[node name="RayCast2D" type="RayCast2D" parent="SenceCollision" index="3"]
+enabled = false
+collision_mask = 3
+
+[node name="FloatIdleState" parent="States" index="0" instance=ExtResource("3_o3a8y")]
+
+[node name="FlyTo" parent="States" index="1" instance=ExtResource("3_fy4rl")]
+
+[node name="rotFallbackTimer" type="Timer" parent="." index="4"]
+one_shot = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="5"]
+path_max_distance = 303.0
+debug_enabled = true
+
+[connection signal="body_entered" from="SenceCollision/SigthArea" to="." method="_on_sigth_area_body_entered"]
+[connection signal="body_exited" from="SenceCollision/SigthArea" to="." method="_on_sigth_area_body_exited"]
