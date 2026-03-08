@@ -57,6 +57,11 @@ func hit():
 	$AnimationPlayer.play("damage_flash")
 	current_health -= 1
 	set_hearts(current_health)
+	if current_health <= 0:
+		call_deferred("game_over")
 
 func _on_area_2d_body_entered(_body: Node2D) -> void:
 	hit()
+
+func game_over():
+	get_tree().change_scene_to_file("res://scenes/game_over.tscn")

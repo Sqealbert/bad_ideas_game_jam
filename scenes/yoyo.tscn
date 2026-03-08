@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgbdmj5a5lqx0"]
+[gd_scene load_steps=7 format=3 uid="uid://cgbdmj5a5lqx0"]
 
 [ext_resource type="Script" uid="uid://csgocuyd3y5eg" path="res://scripts/yoyo.gd" id="1_dtx0s"]
+[ext_resource type="Texture2D" uid="uid://dm35m8mlpamm7" path="res://icon.svg" id="2_dtx0s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6uadq"]
 radius = 13.0
@@ -20,9 +21,6 @@ _data = {
 [node name="Yo-yo" type="StaticBody2D"]
 collision_layer = 4
 script = ExtResource("1_dtx0s")
-attack_length = 100.0
-attack_speed = 0.2
-retract_speed = 0.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_6uadq")
@@ -31,3 +29,10 @@ shape = SubResource("CircleShape2D_6uadq")
 libraries = {
 &"": SubResource("AnimationLibrary_8ka6b")
 }
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(2.3841858e-07, 1.1920929e-07)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_dtx0s")
+
+[node name="StateMachine" type="Node" parent="."]
