@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b26s4j7cwwjxt"]
+[gd_scene load_steps=12 format=3 uid="uid://b26s4j7cwwjxt"]
 
 [ext_resource type="PackedScene" uid="uid://casgcs7q8ujxx" path="res://scenes/player.tscn" id="1_errlg"]
 [ext_resource type="Texture2D" uid="uid://dm35m8mlpamm7" path="res://icon.svg" id="2_74lek"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bhdqvrokkm3o5" path="res://enemies/base_enemy/BaseEnemy.tscn" id="3_iyx0m"]
 [ext_resource type="PackedScene" uid="uid://caas372ggjm2d" path="res://enemies/helicopter_enemy/helicopter_enemy.tscn" id="4_j5jx5"]
 [ext_resource type="PackedScene" uid="uid://dv50bt2xfh6ui" path="res://enemies/plastic_soldier_enemy/plastic_shooter_enemy.tscn" id="6_lpvoh"]
+[ext_resource type="AudioStream" uid="uid://bh4mebecugsjk" path="res://audio/out_the_box_thinking.ogg" id="7_at5dv"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_j5jx5"]
 vertices = PackedVector2Array(1381.4766, 511.14844, 1381.4375, 510.45313, 2460.6406, 517, 2577.1563, 517, 2580.8281, 895.1797, -1093.6094, 900.8125, 266.46875, 501, -1092.3672, 507.4297, -1092.3672, -680.3672, 2578, -722.6094, 2578, 139.32031, 2452.9922, 145, 1714.1328, 11, 1351, 155.92969, 1351, 157.39844, 388.09375, 153.46875, 386.09375, 27.921875, -1094.6094, 28.90625, 1437.25, 11, 1715.1172, 147.57813, 1439.2969, 152.97656)
@@ -97,5 +98,10 @@ current_state_index = 0
 
 [node name="PatrollPoint1" parent="PlasticShooterEnemy" index="4"]
 position = Vector2(887, 208)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_at5dv")
+volume_db = -40.0
+autoplay = true
 
 [editable path="PlasticShooterEnemy"]

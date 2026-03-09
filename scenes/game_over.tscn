@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3kvw5thwuejm"]
+[gd_scene load_steps=3 format=3 uid="uid://d3kvw5thwuejm"]
 
-[ext_resource type="Script" uid="uid://bjw5b5rsu5ea5" path="res://scenes/game_over.gd" id="1_xeevv"]
+[ext_resource type="Script" uid="uid://bjw5b5rsu5ea5" path="res://scripts/game_over.gd" id="1_xeevv"]
+[ext_resource type="AudioStream" uid="uid://cofgcje3rw6qc" path="res://audio/you_broke_it.ogg" id="2_wqhvx"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -40,5 +41,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
 text = "Try again?"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_wqhvx")
+volume_db = -12.0
+autoplay = true
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

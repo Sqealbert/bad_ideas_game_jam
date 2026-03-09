@@ -16,7 +16,6 @@ func _ready() -> void:
 	patrol_index = 0
 	
 func AI(delta):
-	print(target)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta

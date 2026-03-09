@@ -6,7 +6,6 @@ func run(_delta): ## a base state for a state functionality returns true when al
 		dir.x = -1
 	else:
 		dir.x = 1
-	print(dir)
 
 	parent.velocity.x = dir.x * parent. SPEED		
 
