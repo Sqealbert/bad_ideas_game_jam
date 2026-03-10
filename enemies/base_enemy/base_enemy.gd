@@ -8,6 +8,12 @@ var curent_direction:Vector2 = Vector2(1, 0)
 var current_state
 @export var current_state_index: int = 999
 
+var damage = 1
+var contact_damamge = damage
+
+var knockback_force = [100, 100]
+## x is vertical and y is horisontal adition to velocity
+
 var target: Node2D
 
 func initialise_states():

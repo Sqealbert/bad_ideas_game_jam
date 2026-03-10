@@ -5,6 +5,7 @@ var jump_strenght = 500
 var patrol_points
 var patrol_index
 
+
 var following = false
 var in_line_of_sight = false
 
@@ -14,6 +15,7 @@ func _ready() -> void:
 	patrol_points[0].position = $PatrollPoint1.global_position
 	patrol_points[1].position = $PatrollPoint2.global_position
 	patrol_index = 0
+	damage = 2
 	
 func AI(delta):
 	# Add the gravity.

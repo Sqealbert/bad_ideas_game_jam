@@ -53,15 +53,16 @@ func get_input():
 func jump():
 	velocity.y = jump_velocity
 
-func hit():
+func hit(attacking_body: Node2D):
 	$AnimationPlayer.play("damage_flash")
-	current_health -= 1
+	current_health -= attacking_body.damage
 	set_hearts(current_health)
 	if current_health <= 0:
 		call_deferred("game_over")
 
-func _on_area_2d_body_entered(_body: Node2D) -> void:
-	hit()
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemies"):
+		hit(body)
 
 func game_over():
 	get_tree().change_scene_to_file("res://scenes/game_over.tscn")
